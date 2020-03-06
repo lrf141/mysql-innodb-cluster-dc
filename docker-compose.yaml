@@ -1,0 +1,41 @@
+version: "3"
+services:
+    master1:
+        image: mysql:8.0.18
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=master1
+            - MYSQL_PASSWORD=master1
+            - MYSQL_DATABASE=sample
+        volumes:
+            - ./docker/master1/data:/var/lib/mysql
+            - ./docker/master1/my.cnf:/etc/mysql/conf.d/my.cnf
+        ports:
+            - 33060:33060
+
+    slave1:
+        image: mysql:8.0.18
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=slave1
+            - MYSQL_PASSWORD=slave1
+            - MYSQL_DATABASE=sample
+        volumes:
+            - ./docker/slave1/data:/var/lib/mysql
+            - ./docker/slave1/my.cnf:/etc/mysql/conf.d/my.cnf
+        ports:
+            - 33062:33062
+
+    slave2:
+        image: mysql:8.0.18
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=slave2
+            - MYSQL_PASSWORD=slave2
+            - MYSQL_DATABASE=sample
+        volumes:
+            - ./docker/slave2/data:/var/lib/mysql
+            - ./docker/slave2/my.cnf:/etc/mysql/conf.d/my.cnf
+        ports:
+            - 33063:33063
+

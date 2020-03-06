@@ -1,0 +1,3 @@
+#ignore /var/lib/mysql
+docker/*/data/*
+!.gitkeep
