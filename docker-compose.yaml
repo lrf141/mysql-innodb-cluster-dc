@@ -12,6 +12,9 @@ services:
             - ./docker/master1/my.cnf:/etc/mysql/conf.d/my.cnf
         ports:
             - 33060:33060
+        networks:
+            cluster_network:
+                ipv4_address: 172.30.0.60
 
     slave1:
         image: mysql:8.0.19
@@ -25,6 +28,9 @@ services:
             - ./docker/slave1/my.cnf:/etc/mysql/conf.d/my.cnf
         ports:
             - 33062:33062
+        networks:
+            cluster_network:
+                ipv4_address: 172.30.0.62
 
     slave2:
         image: mysql:8.0.19
@@ -38,4 +44,14 @@ services:
             - ./docker/slave2/my.cnf:/etc/mysql/conf.d/my.cnf
         ports:
             - 33063:33063
+        networks:
+            cluster_network:
+                ipv4_address: 172.30.0.63
 
+networks:
+    cluster_network:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.30.0.0/16
