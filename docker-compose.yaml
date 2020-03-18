@@ -47,6 +47,20 @@ services:
         networks:
             cluster_network:
                 ipv4_address: 172.30.0.69
+    
+    router:
+        image: mysql/mysql-router:8.0.19
+        environment:
+            - MYSQL_HOST=master1
+            - MYSQL_PORT=3306
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_INNODB_CLUSTER_MEMBERS=3
+        ports:
+            - 6446:6446
+        networks:
+            cluster_network:
+                ipv4_address: 172.30.1.60
 
 networks:
     cluster_network:
